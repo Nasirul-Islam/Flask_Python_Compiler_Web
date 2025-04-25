@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Run Python Code</title>
+</head>
+<body>
+    <h2>Run Python Code from HTML</h2>
+    <textarea id="code" rows="10" cols="50">print("Hello from Python!")</textarea><br><br>
+    <button type="button" onclick="runCode(event)">Run Code</button>
+    <h3>Output:</h3>
+    <h1 id="output"></h1>
+
+    <script>
+        function runCode(event) {
+            event.preventDefault(); 
+            console.log("clicked on button");
+
+            const code = document.getElementById('code').value;
+
+            fetch('http://127.0.0.1:5000/run', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ code: code })
+            })
+            .then(res => res.json())
+            .then(data => {
+                let output = "";
+                if (data.stdout) output += "Output:\n" + data.stdout;
+                if (data.stderr) output += "\nError:\n" + data.stderr;
+                if (data.error) output += "\nException:\n" + data.error;
+                domManupolation(output);
+            });
+        }
+        function domManupolation(output) {
+            document.getElementById('output').innerText = output;
+        }
+    </script>
+</body>
+</html>
