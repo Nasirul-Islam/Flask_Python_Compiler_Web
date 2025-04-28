@@ -1,0 +1,170 @@
+:root {
+    --bg: #1e1e1e;
+    --text: #ffffff;
+    --border: #444;
+    --output-bg: #121212;
+    --cursor: #ffffff;
+}
+
+body.light {
+    --bg: #ffffff;
+    --text: #000000;
+    --border: #ccc;
+    --output-bg: #f5f5f5;
+    --cursor: #000000;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+header {
+    background-color: var(--bg);
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.theme-toggle {
+    margin-right: 1rem;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #4caf50;
+}
+
+input:checked+.slider:before {
+    transform: translateX(24px);
+}
+
+.toolbar {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem;
+    gap: 1rem;
+    background: var(--bg);
+    border-bottom: 2px solid var(--border);
+}
+
+button {
+    padding: 0.6rem 1rem;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    height: calc(100% - 150px);
+}
+
+.editor,
+.output {
+    flex: 1;
+    padding: 1rem;
+    box-sizing: border-box;
+    overflow: auto;
+    height: 100%;
+}
+
+.editor {
+    border-right: 2px solid var(--border);
+}
+
+.CodeMirror {
+    height: 100%;
+    background-color: var(--bg);
+    color: var(--text);
+    cursor: text !important;
+}
+
+.CodeMirror-cursor {
+    border-left: 2px solid var(--cursor) !important;
+}
+
+.output-box {
+    background-color: var(--output-bg);
+    height: 100%;
+    padding: 1rem;
+    white-space: pre-wrap;
+    font-family: monospace;
+    border-radius: 5px;
+    overflow-y: auto;
+}
+
+footer{
+    text-align: center;
+    height: 3rem;
+    line-height: 3rem;
+    font-size: 1rem;
+    font-weight: bold; 
+    border-top: 2px solid var(--border);
+}
+
+footer span a{
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
+
+    .editor {
+        border-right: none;
+        border-bottom: 2px solid var(--border);
+    }
+}
